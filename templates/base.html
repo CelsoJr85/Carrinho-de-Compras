@@ -1,0 +1,17 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  {% include 'parciais/_head.html' %}
+  {% include 'parciais/_nav.html' %}
+  <!-- Título -->
+  <title>MARK3T</title>
+</head>
+<body class="Dark">
+    {% block content %}{% endblock %}
+  <!-- Bootstrap core JavaScript -->
+  <script src="{% static 'jquery/jquery.slim.min.js'%}"></script>
+  <script src="{% static 'js/bootstrap.bundle.min.js'%}"></script>
+</body>
+
+</html>

@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h1>Carrinho de Compras</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Produto</th>
+                <th>Quantidade</th>
+                <th>Preço Unitário</th>
+                <th>Preço Total</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in cart_items %}
+            <tr>
+                <td>{{ item.name }}</td>
+                <td>{{ item.quantity }}</td>
+                <td>R$ {{ item.price }}</td>
+                <td>R$ {{ item.quantity}} * {{item.price }}</td>
+                <td><a href="{% url 'remove_from_cart' item.product_id %}" class="btn btn-danger btn-sm">Remover</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <p>Total: R$ {{ total_price }}</p>
+    <a href="{% url 'checkout' %}" class="btn btn-success">Finalizar Compra</a>
+</div>
+<script>
+    $(document).ready(function () {
+    // Função para adicionar um produto ao carrinho
+    $('.add-to-cart').click(function () {
+        var product_id = $(this).data('product-id');
+        $.ajax({
+            url: '/add_to_cart/' + product_id + '/',
+            type: 'GET',
+            success: function (data) {
+                // Atualize a exibição do carrinho
+                alert('Produto adicionado ao carrinho.');
+            }
+        });
+    });
+
+    // Função para remover um produto do carrinho
+    $('.remove-from-cart').click(function () {
+        var product_id = $(this).data('product-id');
+        $.ajax({
+            url: '/remove_from_cart/' + product_id + '/',
+            type: 'GET',
+            success: function (data) {
+                // Atualize a exibição do carrinho
+                alert('Produto removido do carrinho.');
+            }
+        });
+    });
+});
+
+</script>
+{% endblock %}

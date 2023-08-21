@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h1>Compra Realizada com Sucesso!</h1>
+    <p>Obrigado por fazer compras na Mark3t. Seu pedido foi confirmado.</p>
+    <p>Itens do Pedido:</p>
+    <ul>
+        {% for item in cart_items %}
+        <li>{{ item.name }} - Quantidade: {{ item.quantity }} - Preço Total: R$ {{ item.quantity}} * {{item.price}}</li>
+        {% endfor %}
+    </ul>
+    <p>Total da Compra: R$ {{ total_price }}</p>
+    <a href="{% url 'index' %}" class="btn btn-success">Finalizar Compra</a>
+</div>
+{% endblock %}
